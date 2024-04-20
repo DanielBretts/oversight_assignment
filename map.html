@@ -25,32 +25,33 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_c0dcc0b76e3d1acb6eafb67707991eb5 {
+                #map_4b1c9141415cd2ec9ae779c6423e3ad3 {
                     position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
+                    width: 80.0%;
+                    height: 70.0%;
                     left: 0.0%;
                     top: 0.0%;
                 }
                 .leaflet-container { font-size: 1rem; }
             </style>
         
+    <script src="https://unpkg.com/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
 </head>
 <body>
     
     
-            <div class="folium-map" id="map_c0dcc0b76e3d1acb6eafb67707991eb5" ></div>
+            <div class="folium-map" id="map_4b1c9141415cd2ec9ae779c6423e3ad3" ></div>
         
 </body>
 <script>
     
     
-            var map_c0dcc0b76e3d1acb6eafb67707991eb5 = L.map(
-                "map_c0dcc0b76e3d1acb6eafb67707991eb5",
+            var map_4b1c9141415cd2ec9ae779c6423e3ad3 = L.map(
+                "map_4b1c9141415cd2ec9ae779c6423e3ad3",
                 {
-                    center: [50.0, 0.0],
+                    center: [0.0, 0.0],
                     crs: L.CRS.EPSG3857,
-                    zoom: 8,
+                    zoom: 2,
                     zoomControl: true,
                     preferCanvas: false,
                 }
@@ -60,13 +61,36 @@
 
         
     
-            var tile_layer_4d1d2d8b6089f1de6f59de52c3084b71 = L.tileLayer(
+            var tile_layer_c38fe9a821f25b58489e09efdc0d524c = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
             );
         
     
-            tile_layer_4d1d2d8b6089f1de6f59de52c3084b71.addTo(map_c0dcc0b76e3d1acb6eafb67707991eb5);
+            tile_layer_c38fe9a821f25b58489e09efdc0d524c.addTo(map_4b1c9141415cd2ec9ae779c6423e3ad3);
+        
+    var vector_grid_protobuf_8a651ffc1ecbe9870457f9ad6b18bc2e = L.vectorGrid.protobuf(
+                'https://tiles.mapillary.com/maps/vtp/mly1_public/2/{z}/{x}/{y}?access_token={token}',
+                    {"token": "MLY|7347100895326908|29541ceaa9079292742a6cead1cb7f0f", "vectorTileLayerStyles": {"overview": {"color": "#e87147", "fill": true, "opacity": 0.6, "radius": 5}}}
+            );
+    
+            vector_grid_protobuf_8a651ffc1ecbe9870457f9ad6b18bc2e.addTo(map_4b1c9141415cd2ec9ae779c6423e3ad3);
+        
+    
+            var layer_control_44716e66c506ae7fd5472701d448a3ba_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_c38fe9a821f25b58489e09efdc0d524c,
+                },
+                overlays :  {
+                    "mapillary" : vector_grid_protobuf_8a651ffc1ecbe9870457f9ad6b18bc2e,
+                },
+            };
+            let layer_control_44716e66c506ae7fd5472701d448a3ba = L.control.layers(
+                layer_control_44716e66c506ae7fd5472701d448a3ba_layers.base_layers,
+                layer_control_44716e66c506ae7fd5472701d448a3ba_layers.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topright"}
+            ).addTo(map_4b1c9141415cd2ec9ae779c6423e3ad3);
+
         
 </script>
 </html>
