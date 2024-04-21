@@ -42,7 +42,4 @@ def create_map():
 
 if __name__ == "__main__":
     create_map()
-    # Replace 'YOUR_API_KEY' with your actual Mapillary API key
-    api_key = os.getenv('MAPILLARY_API_KEY')
-    latitude = 40.7128  # Example latitude (New York City)
-    longitude = -74.0060  # Example longitude (New York City)
+

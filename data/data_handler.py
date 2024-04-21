@@ -6,8 +6,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def get_images_by_location(api_key, bbox):
-    url = f"https://graph.mapillary.com/images?access_token={api_key}&fields=id&bbox={bbox}"
+async def get_images_by_location(bbox):
+    bbox_as_string = ','.join(str(value) for value in bbox.values())
+    print(bbox_as_string)
+    url = f"https://graph.mapillary.com/images?access_token={os.getenv('MAPILLARY_API_KEY')}&fields=id,computed_geometry&bbox={bbox_as_string}"
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()
@@ -17,11 +19,11 @@ def get_images_by_location(api_key, bbox):
 
 
 if __name__ == "__main__":
-    bbox = "12.967,55.597,13.008,55.607"
+    bbox = "12.967,55.597,12.969,55.599"
     images = get_images_by_location(os.getenv('MAPILLARY_API_KEY'), bbox)
     if images:
         print("Total images found:", len(images["data"]))
         for image in images["data"]:
-            print("Image ID:", image["id"])
+            print(f"Image ID: {image['id']}, {image['computed_geometry']['coordinates']}")
     else:
         print("Failed to retrieve images.")
