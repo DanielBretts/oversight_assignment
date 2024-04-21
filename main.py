@@ -11,7 +11,7 @@ import requests
 
 
 def create_map():
-    m = folium.Map(location=[0, 0], zoom_start=2, width="80%", height="70%")
+    map = folium.Map(location=[0, 0], zoom_start=2, width="80%", height="70%")
 
     url = (
         "https://tiles.mapillary.com/maps/vtp/"
@@ -30,36 +30,19 @@ def create_map():
         },
     }
 
-    pbf = folium.plugins.VectorGridProtobuf(url, "mapillary", options,overlay=True)
-    # pbf.__dict__["overlay"] = True  # otherwise, TypeError
-    pbf.add_to(m)
+    pbf = folium.plugins.VectorGridProtobuf(url, "mapillary", options, overlay=True)
 
-    folium.LayerControl().add_to(m)
+    pbf.add_to(map)
 
-    m.save("map.html") # uncomment to make an html
+    folium.LayerControl().add_to(map)
+
+    map.save("map.html")
     print("Map with vector tiles saved as map_with_vector_tiles.html")
-
-def fetch_mapillary_vector_tiles():
-    import requests
-
-    # Define the URL with placeholders for zoom (z), tile coordinates (x, y), and access token
-    url = ("https://tiles.mapillary.com/maps/vtp/mly1_computed_public/2/{z}/{x}/{"
-           "y}?access_token="+os.getenv('MAPILLARY_API_KEY'))
-
-    # Replace the placeholders in the URL with the actual values
-
-    # Send a GET request to the URL
-    response = requests.get(url)
-
-    # Check if the request was successful (status code 200)
-    if response.status_code == 200:
-        # Process the response data (e.g., save the tile image)
-        tile_image = response.content
-        # Further processing of the tile image...
-    else:
-        # Handle unsuccessful request (e.g., print error message)
-        print("Error:", response.status_code)
 
 
 if __name__ == "__main__":
     create_map()
+    # Replace 'YOUR_API_KEY' with your actual Mapillary API key
+    api_key = os.getenv('MAPILLARY_API_KEY')
+    latitude = 40.7128  # Example latitude (New York City)
+    longitude = -74.0060  # Example longitude (New York City)
