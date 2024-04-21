@@ -8,8 +8,8 @@ load_dotenv()
 
 async def get_images_by_location(bbox):
     bbox_as_string = ','.join(str(value) for value in bbox.values())
-    print(bbox_as_string)
     url = f"https://graph.mapillary.com/images?access_token={os.getenv('MAPILLARY_API_KEY')}&fields=id,computed_geometry&bbox={bbox_as_string}"
+    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         return response.json()

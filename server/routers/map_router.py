@@ -18,12 +18,12 @@ class Coordinates(BaseModel):
 
 @router.post("/coordinates/")
 async def receive_coordinates(coordinates: Coordinates):
-    bbox_radius = 0.05  # Example: 0.01 degrees
+    bbox_radius = 0.1  # Example: 0.01 degrees
     bbox = {
-        "min_lng": round(coordinates.lng, 3) - bbox_radius,
-        "min_lat": round(coordinates.lat, 3) - bbox_radius,
-        "max_lng": round(coordinates.lng, 3) + bbox_radius,
-        "max_lat": round(coordinates.lat, 3) + bbox_radius,
+        "min_lng": round(coordinates.lng - bbox_radius, 3),
+        "min_lat": round(coordinates.lat - bbox_radius, 3),
+        "max_lng": round(coordinates.lng + bbox_radius,3),
+        "max_lat": round(coordinates.lat + bbox_radius,3),
     }
 
     print(bbox)
