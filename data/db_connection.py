@@ -15,7 +15,7 @@ def create_connection(db_file):
     return conn
 
 
-def execute_query(conn, query):
+async def execute_query(conn, query):
     """Execute a query on the database."""
     try:
         cursor = conn.cursor()

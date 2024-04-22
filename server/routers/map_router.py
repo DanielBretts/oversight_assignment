@@ -32,8 +32,9 @@ async def receive_coordinates(coordinates: CoordinatesBoundary):
     if response:
         try:
             data = response["data"]
-            await map_service.store_coordinates(data)
-            return {"received": data}
+            boundaries = await map_service.store_coordinates(data)
+            print(boundaries)
+            return {"received": boundaries}
         except Exception as e:
             return {"error": str(e)}
         finally:

@@ -12,3 +12,4 @@ class CoordinatesEntity(BaseModel):
     id: str
     lat: float
     lng: float
+    image_url: str
