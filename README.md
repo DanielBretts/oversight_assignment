@@ -37,3 +37,5 @@ If you want to stop the Docker container, you can use the following command:
 docker stop <container_id>
 ```
 Replace <container_id> with the ID of the running container. You can find the container ID by running docker ps.
+
+![Screenshot_1](https://github.com/DanielBretts/oversight_assignment/assets/60986160/0d1a8cd1-d71e-48a5-b9d4-6a3ded502434)
