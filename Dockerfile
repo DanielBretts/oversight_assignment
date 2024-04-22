@@ -17,6 +17,6 @@ RUN apt-get update
 
 EXPOSE 8000
 
-ENV MAPILLARY_API_KEY MLY|7347100895326908|29541ceaa9079292742a6cead1cb7f0f
+ENV MAPILLARY_API_KEY <YOUR_MAPILLARY_API_KEY>
 
 CMD ["uvicorn", "server.server:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
