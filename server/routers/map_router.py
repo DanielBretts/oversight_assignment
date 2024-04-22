@@ -76,7 +76,6 @@ async def receive_coordinates(coordinates: CoordinatesBoundary):
             conn = create_connection(path_to_db)
             data = response['data']
             for coordinate in data:
-                print(coordinate)
                 store_point_locally(conn, coordinate)
             # Close the connection
             conn.close()
