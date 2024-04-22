@@ -27,8 +27,8 @@
             <style>
                 #map_aeff1a375f3a52d343aa5a37827655e4 {
                     position: relative;
-                    width: 80.0%;
-                    height: 70.0%;
+                    width: 100.0%;
+                    height: 100.0%;
                     left: 0.0%;
                     top: 0.0%;
                 }
@@ -106,5 +106,29 @@
             }
         });
     });
+
+    map_aeff1a375f3a52d343aa5a37827655e4.on('moveend', function(e) {
+        fetchAndAddPoints();
+    });
+            function fetchAndAddPoints() {
+            $.ajax({
+                url: '/points/', // Change the endpoint URL accordingly
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    var points = data.points;
+                    points.forEach(function(point) {
+                        L.marker([point.latitude, point.longitude]).addTo(map_aeff1a375f3a52d343aa5a37827655e4);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching points:', error);
+                }
+            });
+        }
+
+        // Call the function initially
+        fetchAndAddPoints();
 </script>
 </html>
+

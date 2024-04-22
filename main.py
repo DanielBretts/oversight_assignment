@@ -36,7 +36,7 @@ def create_map():
 
     folium.LayerControl().add_to(map)
 
-    map.save("map.html")
+    map.save("map_folium_test.html")
     print("Map with vector tiles saved as map_with_vector_tiles.html")
 
 
