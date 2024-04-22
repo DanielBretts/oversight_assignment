@@ -110,6 +110,7 @@
     map_aeff1a375f3a52d343aa5a37827655e4.on('moveend', function(e) {
         fetchAndAddPoints();
     });
+
             function fetchAndAddPoints() {
             $.ajax({
                 url: '/points/', // Change the endpoint URL accordingly
@@ -118,7 +119,14 @@
                 success: function(data) {
                     var points = data.points;
                     points.forEach(function(point) {
-                        L.marker([point.latitude, point.longitude]).addTo(map_aeff1a375f3a52d343aa5a37827655e4);
+                        var marker = L.marker([point.latitude, point.longitude]).addTo(map_aeff1a375f3a52d343aa5a37827655e4);
+                        marker.on('click', function(e) {
+        // Generate the iframe HTML with the Mapillary embed URL
+var iframeHtml = '<iframe src="https://www.mapillary.com/embed?image_key=' + point.id + '&style=photo" height="480" width="640"></iframe>';
+
+        // Create a popup and bind it to the marker
+        marker.bindPopup(iframeHtml).openPopup();
+    });
                     });
                 },
                 error: function(xhr, status, error) {
