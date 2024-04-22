@@ -5,6 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
         <script>
+            L_PREFER_CANVAS = true;
             L_NO_TOUCH = false;
             L_DISABLE_3D = false;
         </script>
@@ -44,6 +45,8 @@
 
 </body>
 <script>
+    var apiKey = "{{ api_key }}";
+    var baseUrl = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port
     var map_aeff1a375f3a52d343aa5a37827655e4 = L.map(
         "map_aeff1a375f3a52d343aa5a37827655e4",
         {
@@ -64,7 +67,7 @@
 
     var vector_grid_protobuf_83ecdcbe07d1781f79109636bb1f6ece = L.vectorGrid.protobuf(
         'https://tiles.mapillary.com/maps/vtp/mly1_public/2/{z}/{x}/{y}?access_token={token}',
-        {"token": "MLY|7347100895326908|29541ceaa9079292742a6cead1cb7f0f", "vectorTileLayerStyles": {"overview": {"color": "#e87147", "fill": true, "opacity": 0.6, "radius": 5}}}
+        {"token": apiKey, "vectorTileLayerStyles": {"overview": {"color": "#e87147", "fill": true, "opacity": 0.6, "radius": 5}}}
     );
 
     vector_grid_protobuf_83ecdcbe07d1781f79109636bb1f6ece.addTo(map_aeff1a375f3a52d343aa5a37827655e4);
@@ -94,7 +97,7 @@
         };
 
         $.ajax({
-            url: 'http://localhost:8000/coordinates/',
+            url: baseUrl + '/coordinates/',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(data),

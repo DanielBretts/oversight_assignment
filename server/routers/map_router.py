@@ -1,6 +1,9 @@
 import os
-from fastapi import APIRouter
+
+from fastapi import APIRouter,Request
 from starlette.responses import FileResponse
+from starlette.templating import Jinja2Templates
+
 from data.data_fetcher import get_images_by_location
 from data.db_connection import create_connection, execute_query
 from data.models.coordinate import CoordinatesEntity, CoordinatesBoundary
@@ -12,11 +15,10 @@ path_to_db = os.getcwd() + "/data/coordinates"
 
 map_service = MapService(path_to_db)
 
-
+templates = Jinja2Templates(directory='templates')
 @router.get("/")
-async def get_map():
-    return FileResponse("map.html")
-
+async def get_map(request : Request):
+    return templates.TemplateResponse("map.html", {"request": request, "api_key": os.getenv('MAPILLARY_API_KEY')})
 
 @router.post("/coordinates/")
 async def receive_coordinates(coordinates: CoordinatesBoundary):
